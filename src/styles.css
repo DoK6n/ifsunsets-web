@@ -1,0 +1,217 @@
+@import "tailwindcss";
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors are in OKLCH format for better color gamut support in Tailwind CSS v4.
+*/
+
+@theme {
+  /* Gaming Dark Theme Colors - converted to OKLCH for v4 */
+  --color-background: oklch(0.15 0.02 258);
+  --color-foreground: oklch(0.95 0.01 264);
+
+  --color-card: oklch(0.18 0.02 258);
+  --color-card-foreground: oklch(0.95 0.01 264);
+
+  --color-popover: oklch(0.12 0.02 258);
+  --color-popover-foreground: oklch(0.95 0.01 264);
+
+  --color-primary: oklch(0.75 0.15 65);
+  --color-primary-foreground: oklch(0.15 0.02 258);
+  --color-primary-glow: oklch(0.8 0.15 65);
+
+  --color-secondary: oklch(0.22 0.02 258);
+  --color-secondary-foreground: oklch(0.9 0.01 264);
+
+  --color-muted: oklch(0.2 0.02 258);
+  --color-muted-foreground: oklch(0.65 0.01 235);
+
+  --color-accent: oklch(0.7 0.15 200);
+  --color-accent-foreground: oklch(0.15 0.02 258);
+
+  --color-destructive: oklch(0.65 0.2 25);
+  --color-destructive-foreground: oklch(0.98 0.01 264);
+
+  --color-border: oklch(0.24 0.02 258);
+  --color-input: oklch(0.2 0.02 258);
+  --color-ring: oklch(0.75 0.15 65);
+
+  /* Sidebar colors */
+  --color-sidebar-background: oklch(0.98 0 0);
+  --color-sidebar-foreground: oklch(0.26 0.01 240);
+  --color-sidebar-primary: oklch(0.1 0.01 240);
+  --color-sidebar-primary-foreground: oklch(0.98 0 0);
+  --color-sidebar-accent: oklch(0.96 0.005 240);
+  --color-sidebar-accent-foreground: oklch(0.1 0.01 240);
+  --color-sidebar-border: oklch(0.91 0.01 220);
+  --color-sidebar-ring: oklch(0.6 0.2 217);
+
+  /* Dark theme overrides */
+  --color-sidebar-background-dark: oklch(0.1 0.01 240);
+  --color-sidebar-foreground-dark: oklch(0.96 0.005 240);
+  --color-sidebar-primary-dark: oklch(0.48 0.15 224);
+  --color-sidebar-primary-foreground-dark: oklch(1 0 0);
+  --color-sidebar-accent-dark: oklch(0.16 0.01 240);
+  --color-sidebar-accent-foreground-dark: oklch(0.96 0.005 240);
+  --color-sidebar-border-dark: oklch(0.16 0.01 240);
+
+  /* Spacing and other design tokens */
+  --radius: 0.75rem;
+  --spacing: 0.25rem;
+
+  /* Container settings */
+  --breakpoint-2xl: 1400px;
+
+  /* Custom design system extensions */
+  --gradient-hero: linear-gradient(135deg, oklch(0.75 0.15 65) 0%, oklch(0.8 0.15 65) 50%, oklch(0.7 0.15 200) 100%);
+  --gradient-card: linear-gradient(145deg, oklch(0.18 0.02 258) 0%, oklch(0.2 0.02 258) 100%);
+  --shadow-glow: 0 0 40px oklch(0.75 0.15 65 / 0.3);
+  --shadow-card: 0 8px 32px oklch(0.02 0.02 220 / 0.6);
+
+  /* Animation settings */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-fade-in: fade-in 0.6s ease-out;
+  --animate-glow-pulse: glow-pulse 2s ease-in-out infinite;
+}
+
+@layer base {
+  :root {
+    /* Map Tailwind v4 color variables to our custom names for compatibility */
+    --background: var(--color-background);
+    --foreground: var(--color-foreground);
+    --card: var(--color-card);
+    --card-foreground: var(--color-card-foreground);
+    --popover: var(--color-popover);
+    --popover-foreground: var(--color-popover-foreground);
+    --primary: var(--color-primary);
+    --primary-foreground: var(--color-primary-foreground);
+    --primary-glow: var(--color-primary-glow);
+    --secondary: var(--color-secondary);
+    --secondary-foreground: var(--color-secondary-foreground);
+    --muted: var(--color-muted);
+    --muted-foreground: var(--color-muted-foreground);
+    --accent: var(--color-accent);
+    --accent-foreground: var(--color-accent-foreground);
+    --destructive: var(--color-destructive);
+    --destructive-foreground: var(--color-destructive-foreground);
+    --border: var(--color-border);
+    --input: var(--color-input);
+    --ring: var(--color-ring);
+    --sidebar-background: var(--color-sidebar-background);
+    --sidebar-foreground: var(--color-sidebar-foreground);
+    --sidebar-primary: var(--color-sidebar-primary);
+    --sidebar-primary-foreground: var(--color-sidebar-primary-foreground);
+    --sidebar-accent: var(--color-sidebar-accent);
+    --sidebar-accent-foreground: var(--color-sidebar-accent-foreground);
+    --sidebar-border: var(--color-sidebar-border);
+    --sidebar-ring: var(--color-sidebar-ring);
+  }
+
+  .dark {
+    /* Override with dark theme colors */
+    --background: var(--color-background);
+    --foreground: var(--color-foreground);
+    --card: var(--color-card);
+    --card-foreground: var(--color-card-foreground);
+    --popover: var(--color-popover);
+    --popover-foreground: var(--color-popover-foreground);
+    --primary: var(--color-primary);
+    --primary-foreground: var(--color-primary-foreground);
+    --secondary: var(--color-secondary);
+    --secondary-foreground: var(--color-secondary-foreground);
+    --muted: var(--color-muted);
+    --muted-foreground: var(--color-muted-foreground);
+    --accent: var(--color-accent);
+    --accent-foreground: var(--color-accent-foreground);
+    --destructive: var(--color-destructive);
+    --destructive-foreground: var(--color-destructive-foreground);
+    --border: var(--color-border);
+    --input: var(--color-input);
+    --ring: var(--color-ring);
+    --sidebar-background: var(--color-sidebar-background-dark);
+    --sidebar-foreground: var(--color-sidebar-foreground-dark);
+    --sidebar-primary: var(--color-sidebar-primary-dark);
+    --sidebar-primary-foreground: var(--color-sidebar-primary-foreground-dark);
+    --sidebar-accent: var(--color-sidebar-accent-dark);
+    --sidebar-accent-foreground: var(--color-sidebar-accent-foreground-dark);
+    --sidebar-border: var(--color-sidebar-border-dark);
+    --sidebar-ring: var(--color-sidebar-ring);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  /* Gaming UI Utilities */
+  .hero-text {
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow-effect {
+    filter: drop-shadow(var(--shadow-glow));
+  }
+
+  .card-gaming {
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .btn-gaming {
+    @apply bg-primary hover:bg-primary-glow text-primary-foreground font-medium px-6 py-3 rounded-lg transition-all duration-300;
+    box-shadow: 0 4px 16px oklch(var(--color-primary) / 0.3);
+  }
+
+  .btn-gaming:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px oklch(var(--color-primary) / 0.4);
+  }
+
+  /* Animation keyframes */
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes glow-pulse {
+    0%,
+    100% {
+      filter: drop-shadow(0 0 20px oklch(var(--color-primary) / 0.3));
+    }
+    50% {
+      filter: drop-shadow(0 0 40px oklch(var(--color-primary) / 0.6));
+    }
+  }
+}

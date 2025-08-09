@@ -1,0 +1,6 @@
+export * from './community-section'
+export * from './download-section'
+export * from './game-info-section'
+export * from './hero-section'
+export * from './news-section'
+export * from './video-section'
