@@ -1,17 +1,15 @@
 import { V1 } from '../-constants'
-import type { StoveProductComunityCoverRequestDto } from '../-dtos'
-import { getProps, httpClient } from '../-lib'
-import type { StoveCompApiResponse, StoveProductComunityCover } from '../-types'
+import type { StoveArticlesRequestDto } from '../-dtos'
+import { httpClient } from '../-lib'
+import type { Article, StoveArticlesApiResponse } from '../-types'
 
 export class StoveArticleService {
-  private readonly API_URL = `cwms/${V1}/channel/10000/article_group/FIXED_ARTICLE/article/list`
-
-  public getArticles = async (dto: StoveProductComunityCoverRequestDto) => {
-    const response = await httpClient.get(this.API_URL, {
+  public getArticles = async (dto: StoveArticlesRequestDto) => {
+    const response = await httpClient.get(`cwms/${V1}/channel/10000/article_group/FIXED_ARTICLE/article/list`, {
       searchParams: dto,
     })
 
-    const data = await response.json<StoveCompApiResponse<StoveProductComunityCover>>()
-    return getProps(data)
+    const data = await response.json<StoveArticlesApiResponse<Article>>()
+    return data.value[0].list
   }
 }
