@@ -1,5 +1,4 @@
 export interface StoveArticlesRequestDto {
-  [key: string]: string
   article_group_seq_list: string
   interaction_type_code: string
   location_code: string

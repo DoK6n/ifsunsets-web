@@ -1,5 +1,4 @@
 export interface YouTubePlaylistItemsRequestDto {
-  [key: string]: string
   part: string
   maxResults: string
   status: string
