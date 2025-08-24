@@ -6,6 +6,7 @@ export const Route = createFileRoute('/')({
   loader: async ({ context }) => {
     await context.queryClient.ensureQueryData(queries.youtube.playlistItems())
     await context.queryClient.ensureQueryData(queries.stove.systemRequirement())
+    await context.queryClient.ensureQueryData(queries.stove.articles())
   },
   component: Home,
 })

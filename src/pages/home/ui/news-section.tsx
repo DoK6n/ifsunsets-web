@@ -1,84 +1,24 @@
+import { cva } from 'class-variance-authority'
 import { Calendar, Eye, MessageSquare } from 'lucide-react'
 import type React from 'react'
 import { Badge } from '~/components/ui/badge'
 import { Button } from '~/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card'
+import { useNews } from '~/pages/news/lib'
 
-interface NewsItem {
-  id: string
-  title: string
-  description: string
-  date: string
-  category: '공지' | '업데이트' | '이벤트'
-  views: number
-  comments: number
-  isHot?: boolean
-}
-
-const newsData: NewsItem[] = [
-  {
-    id: '1',
-    title: '2025.07.19 긴급 패치 사항',
-    description: '게임 안정성 개선 및 버그 수정',
-    date: '2025.07.19',
-    category: '공지',
-    views: 1234,
-    comments: 12,
-    isHot: true,
+const categoryVariants = cva('bg-muted/20 text-muted-foreground border-muted/30', {
+  variants: {
+    category: {
+      공지: 'bg-destructive/20 text-destructive border-destructive/30',
+      업데이트: 'bg-accent/20 text-accent border-accent/30',
+      이벤트: 'bg-primary/20 text-primary border-primary/30',
+    },
   },
-  {
-    id: '2',
-    title: '★2025.07.17★ 핫픽스 노트',
-    description: '성능 최적화 및 밸런스 조정',
-    date: '2025.07.17',
-    category: '업데이트',
-    views: 2156,
-    comments: 33,
-    isHot: true,
-  },
-  {
-    id: '3',
-    title: '2025.07.14 업데이트 문의',
-    description: '새로운 지역 추가 및 아이템 밸런스 조정',
-    date: '2025.07.14',
-    category: '공지',
-    views: 1890,
-    comments: 50,
-  },
-  {
-    id: '4',
-    title: "2025.07.12 '여름' 업데이트 'X'",
-    description: '여름 시즌 특별 콘텐츠 및 이벤트',
-    date: '2025.07.12',
-    category: '이벤트',
-    views: 3421,
-    comments: 95,
-  },
-  {
-    id: '5',
-    title: '개발진 편지',
-    description: '앞으로의 개발 방향성과 유저 피드백 반영 계획',
-    date: '2025.06.18',
-    category: '공지',
-    views: 5643,
-    comments: 253,
-  },
-]
-
-const getCategoryColor = (category: string) => {
-  switch (category) {
-    case '공지':
-      return 'bg-destructive/20 text-destructive border-destructive/30'
-    case '업데이트':
-      return 'bg-accent/20 text-accent border-accent/30'
-    case '이벤트':
-      return 'bg-primary/20 text-primary border-primary/30'
-    default:
-      return 'bg-muted/20 text-muted-foreground border-muted/30'
-  }
-}
+})
 
 export const NewsSection: React.FC = () => {
+  const { news } = useNews()
+
   return (
     <section className="py-20 px-6">
       <div className="max-w-6xl mx-auto">
@@ -100,7 +40,7 @@ export const NewsSection: React.FC = () => {
 
           <CardContent className="p-0">
             <div className="divide-y divide-border/50">
-              {newsData.map(news => (
+              {news.map(news => (
                 <a
                   key={news.id}
                   href={`/news/${news.id}`}
@@ -109,8 +49,11 @@ export const NewsSection: React.FC = () => {
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-3 mb-2">
-                        <Badge variant="outline" className={getCategoryColor(news.category)}>
-                          {news.category}
+                        <Badge
+                          variant="outline"
+                          className={categoryVariants({ category: news.headLine as '공지' | '업데이트' | '이벤트' })}
+                        >
+                          {news.headLine}
                         </Badge>
                         {news.isHot && (
                           <Badge className="bg-destructive text-destructive-foreground animate-glow-pulse">HOT</Badge>
@@ -121,7 +64,7 @@ export const NewsSection: React.FC = () => {
                         {news.title}
                       </h3>
 
-                      <p className="text-muted-foreground mb-3 text-sm">{news.description}</p>
+                      <p className="text-muted-foreground mb-3 text-sm">{news.subtitle}</p>
 
                       <div className="flex items-center gap-4 text-sm text-muted-foreground">
                         <div className="flex items-center gap-1">
@@ -140,7 +83,7 @@ export const NewsSection: React.FC = () => {
                     </div>
 
                     <div className="text-right text-sm text-muted-foreground">
-                      <div>GM IfSunSets</div>
+                      <div>{news.author}</div>
                       <div className="mt-1">{news.date}</div>
                     </div>
                   </div>

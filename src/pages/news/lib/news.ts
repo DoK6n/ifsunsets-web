@@ -8,6 +8,7 @@ export interface News {
   title: string
   date: string
   headLine: string
+  subtitle: string
   views: number
   comments: number
   isHot?: boolean
@@ -20,6 +21,7 @@ const map = (items: Article[]): News[] =>
     title: item.title,
     date: format(item.create_datetime, 'yyyy.MM.dd'),
     headLine: '공지',
+    subtitle: item.subtitle,
     views: item.user_interaction_score_info.view_score,
     comments: item.user_interaction_score_info.comment_score,
     author: `${item.user_info.grade_badge} ${item.user_info.nickname}`,
