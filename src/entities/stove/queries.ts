@@ -1,16 +1,16 @@
 import { queryOptions } from '@tanstack/react-query'
-import ky from 'ky'
 import type { Article, SystemRequirement } from '~/routes/api/stove/-types'
+import { api } from '~/shared/lib'
 
 export const stoveQueries = {
   systemRequirement: () =>
     queryOptions({
       queryKey: ['stoveSystemRequirement'],
-      queryFn: () => ky.get('api/stove/system/requirement').json<SystemRequirement>(),
+      queryFn: () => api.get('api/stove/system/requirement').json<SystemRequirement>(),
     }),
   articles: () =>
     queryOptions({
       queryKey: ['articlesList'],
-      queryFn: () => ky.get('api/stove/articles').json<Article[]>(),
+      queryFn: () => api.get('api/stove/articles').json<Article[]>(),
     }),
 }

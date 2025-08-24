@@ -1,11 +1,11 @@
 import { queryOptions } from '@tanstack/react-query'
-import ky from 'ky'
 import type { YoutubePlaylistItem } from '~/routes/api/youtube/-types'
+import { api } from '~/shared/lib'
 
 export const youtubeQueries = {
   playlistItems: () =>
     queryOptions({
       queryKey: ['youtubePlaylistItems'],
-      queryFn: () => ky.get('api/youtube/playlist').json<YoutubePlaylistItem[]>(),
+      queryFn: () => api.get('api/youtube/playlist').json<YoutubePlaylistItem[]>(),
     }),
 }
